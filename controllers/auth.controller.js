@@ -78,5 +78,14 @@ export const signIn = async(req, res, next) => {
 }
 
 export const signOut = async(req, res, next) => {
-
+    try {
+        // JWT adalah stateless — client cukup buang token dari sisi mereka.
+        // Kirim respons sukses agar client tahu untuk clear token.
+        res.status(200).json({
+            success: true,
+            message: 'Sign out successful'
+        });
+    } catch(error) {
+        next(error);
+    }
 }
